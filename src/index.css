@@ -42,7 +42,7 @@ input {
   flex: 1;
 }
 
-form {
+.form {
   display: flex;
   flex-direction: column;
   width: 400px;
