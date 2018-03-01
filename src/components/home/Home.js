@@ -1,23 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import SearchForm from './SearchForm';
+import { post } from '../../apis/MusicThisWeekAPI';
 
 class Home extends React.Component {
+  static propTypes = {
+    spotify_token: PropTypes.string.isRequired,
+  }
+
   componentWillMount() {
     // Compute dateoffset
     // Offset end date by desired number of days
     // end.setDate(start.getDate() + 7);
   }
 
-  onSubmit = (data) => {
-    // Format strings for the date elements:
-    // var start_formatted = data.start.toJSON().slice(0,10);
-    // var end_formatted = data.end.toJSON().slice(0,10);
-    console.log('submitting data: ', data);
+  handleResponse = (response) => {
+    response.json().then(r => {
+      console.log('Got Response: ', r);
+      window.location.replace(r.playlist)
+    });
+  }
 
-    // Update Search text
-    // Display a "this will take a while warinng"
-    // Make the request!
+  onSubmit = (data) => {
+    console.log('submitting data: ', data);
+    const { spotify_token } = this.props;
+    post('/create/', { ...data, spotify_token }).then(this.handleResponse)
   }
 
   render() {
@@ -30,4 +38,8 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  spotify_token: state.auth.spotify_token,
+})
+
+export default connect(mapStateToProps)(Home);

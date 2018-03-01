@@ -49,7 +49,8 @@ class SearchForm extends Component {
             onChange = {this.onEndChange}
           />
         </div>
-        <button type="submit" id="search-button" onClick={ this.onSubmit }>
+        {/*disabled={this.state.searching} */}
+        <button type="submit" id="search-button" onClick={ this.onSubmit } >
           {this.state.searching ? 'SEARCHING' : 'SEARCH'}
         </button>
         {this.state.searching && (
