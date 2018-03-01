@@ -1,29 +1,21 @@
 import React from 'react';
-import SiteHeader from './chrome/SiteHeader';
-import SiteBody from './chrome/SiteBody';
-import SpotifyLogin from './svg/spotify_login.svg';
-import Login from './auth/Login';
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { Provider } from 'react-redux';
+import Main from './components/Main';
+import Callback from './components/auth/Callback';
+import { configureStore } from './store/configureStore';
 
-import './App.css';
+const store = configureStore();
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <SiteHeader />
-        <SiteBody>
-          <div className="hero top-pad">
-            <h1>WELCOME TO MUSIC THIS WEEK</h1>
-            <p>We generate Spotify playlist of bands that are playing in your area in the near future.</p>
-            <p>If you discover music you like, check out their show!</p>
-            <Login>
-              <img src={SpotifyLogin} alt="Login with Spotify" width="244" height="44" />
-            </Login>
-          </div>
-        </SiteBody>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <Provider store={store}>
+    <Router>
+      <Switch>
+        <Route path="/callback" component={Callback} />
+        <Route component={Main} />
+      </Switch>
+    </Router>
+  </Provider>
+)
 
 export default App;
