@@ -11,7 +11,10 @@ class SiteHeader extends React.Component {
   render() {
     return (
       <div className="site-header">
-        {this.props.isLoggedIn ? <Profile /> : <Login />}
+        <div>Music This Week</div>
+        <div>
+          {this.props.isLoggedIn ? <Profile /> : <Login />}
+        </div>
       </div>
     )
   }

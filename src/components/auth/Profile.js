@@ -10,7 +10,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <a onClick={this.onClick}>Log Out</a>
+      <div className="login" onClick={this.onClick}>Log Out</div>
     );
   }
 
