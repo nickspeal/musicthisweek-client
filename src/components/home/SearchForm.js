@@ -30,6 +30,7 @@ class SearchForm extends Component {
   render() {
     return (
       <div className="form">
+        <h3>FIND MUSIC THIS WEEK:</h3>
         <input
           type="text"
           value={this.state.location}
@@ -50,14 +51,9 @@ class SearchForm extends Component {
           />
         </div>
         {/*disabled={this.state.searching} */}
-        <button type="submit" id="search-button" onClick={ this.onSubmit } >
+        <button type="submit" onClick={ this.onSubmit } >
           {this.state.searching ? 'SEARCHING' : 'SEARCH'}
         </button>
-        {this.state.searching && (
-          <p id="wait-text">
-            Please be patient. In few minutes a playlist called Music This Week will appear in your spotify app. If you close this page, the playlist will still be created in the background.
-          </p>
-        )}
       </div>
     );
   }

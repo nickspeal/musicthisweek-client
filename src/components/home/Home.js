@@ -2,12 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SearchForm from './SearchForm';
+import Playlist from './Playlist';
 import { post } from '../../apis/MusicThisWeekAPI';
 
 class Home extends React.Component {
   static propTypes = {
     spotify_token: PropTypes.string.isRequired,
   }
+
+  state = {
+    playlist: undefined,
+  };
 
   componentWillMount() {
     // Compute dateoffset
@@ -17,8 +22,9 @@ class Home extends React.Component {
 
   handleResponse = (response) => {
     response.json().then(r => {
-      console.log('Got Response: ', r);
-      window.location.replace(r.playlist)
+      this.setState({
+        playlist: r.playlist
+      })
     });
   }
 
@@ -30,8 +36,11 @@ class Home extends React.Component {
   render() {
     return (
       <div className="hero">
-        <h3>FIND MUSIC THIS WEEK:</h3>
-        <SearchForm onSubmit={this.onSubmit} />
+        {this.state.playlist ? (
+          <Playlist playlist={this.state.playlist} />
+        ) : (
+          <SearchForm onSubmit={this.onSubmit} />
+        )}
       </div>
     );
   }

@@ -19,7 +19,9 @@ class Login extends React.Component {
     children: 'Log In',
   }
 
-  onClick = () => window.location.replace(SPOTIFY_URL);
+  onClick = () => {
+    window.location = SPOTIFY_URL
+  };
 
   render() {
     return (

@@ -50,6 +50,10 @@ input {
   width: 400px;
 }
 
+.playlist {
+  max-width: 800px;
+}
+
 .dates {
   flex: 1;
   display: flex;
