@@ -24,8 +24,7 @@ class Home extends React.Component {
 
   onSubmit = (data) => {
     console.log('submitting data: ', data);
-    const { spotify_token } = this.props;
-    post('/create/', { ...data, spotify_token }).then(this.handleResponse)
+    post('/create/', { ...data }, this.props.spotify_token).then(this.handleResponse)
   }
 
   render() {
