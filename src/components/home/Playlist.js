@@ -37,9 +37,11 @@ class Playlist extends Component {
       const nextList = [...this.state.list];
       const index = nextList.findIndex(item => item.artists.indexOf(artist) !==-1)
       const show = nextList[index];
-      show['song'] = parsed.songs[0];
-      console.log(nextList[index])
-      this.setState({ list: nextList });
+      if(show) {
+        show['song'] = parsed.songs[0];
+        this.setState({ list: nextList });
+      }
+
     }
   }
 
