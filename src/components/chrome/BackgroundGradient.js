@@ -8,9 +8,11 @@ const colors = [
   '#2c5e92cc',
   '#552f6dcc',
 ];
-const color1 = colors[Math.floor(Math.random() * colors.length)];
-const color2 = colors[Math.floor(Math.random() * colors.length)];
-const min = 40;
+// const color1 = colors[Math.floor(Math.random() * colors.length)];
+// const color2 = colors[Math.floor(Math.random() * colors.length)];
+const color1 = colors[3];
+const color2 = colors[1];
+const min = 20;
 const max = 100 - min;
 const transitionPoint = `${Math.random() * (max - min) + min}%`
 
