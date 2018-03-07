@@ -6,8 +6,28 @@ class Playlist extends Component {
     playlist: PropTypes.string.isRequired,
   }
 
+  state = {
+    progress: undefined,
+    status: undefined,
+  }
+
   onClick = () => {
     window.location = this.props.playlist;
+  }
+
+  componentDidMount() {
+    console.log("starting websocket")
+    const url = `ws://127.0.0.1:8888/subscribe/?playlist=${this.props.playlist}`;
+    this.socket = new WebSocket(url); // optional second arg protocol
+    this.socket.onopen = (event) => console.log("socket opened");
+    this.socket.onmessage = this.onMessage
+    this.socket.onclose = (event) => console.log("socket closed");
+  }
+
+  onMessage = ({ data }) => {
+    const parsed = JSON.parse(data);
+    const { progress, status } = parsed;
+    this.setState({ progress, status })
   }
 
   render() {
@@ -20,6 +40,12 @@ class Playlist extends Component {
         <button onClick={this.onClick} style={{ width: '400px' }}>
           Open Music This Week on Spotify
         </button>
+        <div>
+          {this.state.progress && `${this.state.progress}% complete`}
+        </div>
+        <div>
+          {this.state.status}
+        </div>
       </div>
     );
   }
