@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import PlaylistTable from './PlaylistTable';
 
 class Playlist extends Component {
   static propTypes = {
@@ -7,8 +8,7 @@ class Playlist extends Component {
   }
 
   state = {
-    progress: undefined,
-    status: undefined,
+    list: [],
   }
 
   onClick = () => {
@@ -26,26 +26,40 @@ class Playlist extends Component {
 
   onMessage = ({ data }) => {
     const parsed = JSON.parse(data);
-    const { progress, status } = parsed;
-    this.setState({ progress, status })
+    console.log("received data. Parsed to:", parsed);
+    if (parsed.type === 'events_found') {
+      console.log('Type events_found');
+      const list = [...this.state.list, ...parsed.events.map(e => JSON.parse(e))];
+      console.log(list)
+      this.setState({ list });
+    } else if (parsed.type === 'song_found') {
+      const artist = parsed.artist;
+      const nextList = [...this.state.list];
+      const index = nextList.findIndex(item => item.artists.indexOf(artist) !==-1)
+      const show = nextList[index];
+      show['song'] = parsed.songs[0];
+      console.log(nextList[index])
+      this.setState({ list: nextList });
+    }
   }
 
   render() {
     return (
-      <div className="playlist">
-        <h1>Searching...</h1>
-        <p>
-          Right now we are crawling the web to find concerts in your area. For each artist playing at each event, we're searching Spotify for their most polular tracks and creating a playlist out of them. All this takes a couple minutes for now, but rest assured that I'm working on parallelizing these searches to make them faster. Anyway, the playlist is already created and songs will be added to it in the background over the next couple minutes. Head over to Spotify and check it out!
-        </p>
-        <button onClick={this.onClick} style={{ width: '400px' }}>
-          Open Music This Week on Spotify
-        </button>
-        <div>
-          {this.state.progress !== undefined && `${Math.round(this.state.progress)}% complete`}
+      <div style={{ width: '80%', height: '100%', margin: 'auto' }}>
+        <div style={{ textAlign: 'left', maxWidth: '600px', marginBottom: '50px' }}>
+          <h4>MADE FOR YOU</h4>
+          <h1>Music This Week</h1>
+          <p>
+            Your weekly mixtape of upcoming concerts. Enjoy new discoveries and maybe youll find a concert you want to see! Check back here to update the playlist next week!
+          </p>
+          <p>
+            Made for you by Music This Week - {this.state.list && this.state.list.length} songs, 7 days
+          </p>
+          <button onClick={this.onClick} style={{ width: '200px' }}>
+            PLAY ON SPOTIFY
+          </button>
         </div>
-        <div>
-          {this.state.status}
-        </div>
+        {this.state.list.length ? <PlaylistTable list={this.state.list} /> : <div>Searching for shows near you...</div>}
       </div>
     );
   }

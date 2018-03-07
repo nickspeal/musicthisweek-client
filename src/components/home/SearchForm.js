@@ -29,31 +29,33 @@ class SearchForm extends Component {
 
   render() {
     return (
-      <div className="form">
-        <h3>FIND MUSIC THIS WEEK:</h3>
-        <input
-          type="text"
-          value={this.state.location}
-          placeholder= "Location"
-          onChange = {this.onLocationChange}
-        />
-        <div className="dates">
+      <div className="hero">
+        <div className="form">
+          <h3>FIND MUSIC THIS WEEK:</h3>
           <input
-            type="date"
-            value = {this.state.start}
-            onChange = {this.onStartChange}
+            type="text"
+            value={this.state.location}
+            placeholder= "Location"
+            onChange = {this.onLocationChange}
           />
-          <span>to</span>
-          <input
-            type="date"
-            value = {this.state.end}
-            onChange = {this.onEndChange}
-          />
+          <div className="dates">
+            <input
+              type="date"
+              value = {this.state.start}
+              onChange = {this.onStartChange}
+            />
+            <span>to</span>
+            <input
+              type="date"
+              value = {this.state.end}
+              onChange = {this.onEndChange}
+            />
+          </div>
+          {/*disabled={this.state.searching} */}
+          <button type="submit" onClick={ this.onSubmit } >
+            {this.state.searching ? 'SEARCHING' : 'SEARCH'}
+          </button>
         </div>
-        {/*disabled={this.state.searching} */}
-        <button type="submit" onClick={ this.onSubmit } >
-          {this.state.searching ? 'SEARCHING' : 'SEARCH'}
-        </button>
       </div>
     );
   }

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import SearchForm from './SearchForm';
 import Playlist from './Playlist';
 import { post } from '../../apis/MusicThisWeekAPI';
+import { removeToken } from '../../actions/authActions';
 
 class Home extends React.Component {
   static propTypes = {
@@ -21,11 +22,21 @@ class Home extends React.Component {
   }
 
   handleResponse = (response) => {
-    response.json().then(r => {
-      this.setState({
-        playlist: r.playlist
-      })
-    });
+    if (response.status === 200) {
+      response.json().then(r => {
+        this.setState({
+          playlist: r.playlist
+        })
+      });
+    } else if (response.status === 403) {
+      // TODO move this into the API or something more general
+      console.log("403 Unauthorized response. Prompting to log in.")
+      this.props.removeToken();
+    } else {
+      console.error("Unexpected response from API: ", response);
+    }
+
+
   }
 
   onSubmit = (data) => {
@@ -34,15 +45,10 @@ class Home extends React.Component {
   }
 
   render() {
-    return (
-      <div className="hero">
-        {this.state.playlist ? (
-          <Playlist playlist={this.state.playlist} />
-        ) : (
-          <SearchForm onSubmit={this.onSubmit} />
-        )}
-      </div>
-    );
+    if (this.state.playlist) {
+      return <Playlist playlist={this.state.playlist} />
+    }
+    return <SearchForm onSubmit={this.onSubmit} />
   }
 }
 
@@ -50,4 +56,4 @@ const mapStateToProps = state => ({
   spotify_token: state.auth.spotify_token,
 })
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, { removeToken })(Home);

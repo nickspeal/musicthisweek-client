@@ -20,7 +20,8 @@ body {
   text-align: center;
   display: flex;
   flex-direction: column;
-  margin: auto;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .top-pad {
@@ -50,10 +51,6 @@ input {
   width: 400px;
 }
 
-.playlist {
-  max-width: 800px;
-}
-
 .dates {
   flex: 1;
   display: flex;
@@ -66,7 +63,7 @@ input {
 }
 
 button {
-  background: rgba(29, 185, 84);
+  background: rgb(29, 185, 84);
   color: white;
   border: none;
   border-radius: 22px;
@@ -76,4 +73,23 @@ button {
 /* and logout */
 .login {
   cursor: grab;
+}
+
+.table-container {
+    height: 100%;
+    overflow-y: scroll;
+}
+table {
+  text-align: left;
+  width: 100%;
+}
+
+tr {
+  border-top: 1px solid rgb(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgb(255, 255, 255, 0.4);
+  line-height: 3rem;
+}
+
+tbody > tr:hover {
+  background: rgb(0, 0, 0, 0.1);
 }
