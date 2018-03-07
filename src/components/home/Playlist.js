@@ -41,7 +41,7 @@ class Playlist extends Component {
           Open Music This Week on Spotify
         </button>
         <div>
-          {this.state.progress && `${this.state.progress}% complete`}
+          {this.state.progress !== undefined && `${Math.round(this.state.progress)}% complete`}
         </div>
         <div>
           {this.state.status}
