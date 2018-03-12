@@ -8,7 +8,8 @@ class Playlist extends Component {
   }
 
   state = {
-    list: [],
+    events: [],
+    songs: [],
   }
 
   onClick = () => {
@@ -29,18 +30,19 @@ class Playlist extends Component {
     console.log("received data. Parsed to:", parsed);
     if (parsed.type === 'events_found') {
       console.log('Type events_found');
-      const list = [...this.state.list, ...parsed.events.map(e => JSON.parse(e))];
-      console.log(list)
-      this.setState({ list });
-    } else if (parsed.type === 'song_found') {
-      const artist = parsed.artist;
-      const nextList = [...this.state.list];
-      const index = nextList.findIndex(item => item.artists.indexOf(artist) !==-1)
-      const show = nextList[index];
-      if(show) {
-        show['song'] = parsed.songs[0];
-        this.setState({ list: nextList });
-      }
+      const events = [...this.state.events, ...parsed.events];
+      this.setState({ events });
+    } else if (parsed.type === 'songs_found') {
+      const songs = [...this.state.songs, ...parsed.songs];
+      this.setState({ songs })
+      // const artist = parsed.artist;
+      // const nextList = [...this.state.list];
+      // const index = nextList.findIndex(item => item.artists.indexOf(artist) !==-1)
+      // const show = nextList[index];
+      // if(show) {
+      //   show['song'] = parsed.songs[0];
+      //   this.setState({ list: nextList });
+      // }
 
     }
   }
@@ -55,13 +57,13 @@ class Playlist extends Component {
             Your weekly mixtape of upcoming concerts. Enjoy new discoveries and maybe youll find a concert you want to see! Check back here to update the playlist next week!
           </p>
           <p>
-            Made for you by Music This Week - {this.state.list && this.state.list.length} songs, 7 days
+            Made for you by Music This Week - {this.state.events.length} concerts, {this.state.songs.length} songs
           </p>
           <button onClick={this.onClick} style={{ width: '200px' }}>
             PLAY ON SPOTIFY
           </button>
         </div>
-        {this.state.list.length ? <PlaylistTable list={this.state.list} /> : <div>Searching for shows near you...</div>}
+        {this.state.songs.length ? <PlaylistTable list={this.state.songs} /> : <div>Searching for shows near you...</div>}
       </div>
     );
   }

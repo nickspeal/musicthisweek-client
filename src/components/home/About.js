@@ -5,7 +5,7 @@ import Login from '../auth/Login';
 
 
 const About = () => (
-  <div className="hero top-pad">
+  <div className="hero">
       <h1>WELCOME TO MUSIC THIS WEEK</h1>
       <p>We generate a Spotify playlist of bands that are playing in your area in the near future.</p>
       <p>If you discover music you like, check out their show!</p>

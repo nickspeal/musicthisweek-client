@@ -15,11 +15,11 @@ const PlaylistTable = (props) => {
         </thead>
         <tbody>
           {props.list.map(row => (
-            <tr key={`${row.date}-${row.venue}-${row.artists}`}>
-              <td>{row.song}</td>
-              <td>{row.artists[0]}</td>
-              <td>{row.venue}</td>
-              <td>{row.date}</td>
+            <tr key={`${row.song.uri}`}>
+              <td>{row.song.name}</td>
+              <td>{row.artist.name}</td>
+              <td>{row.event.venue}</td>
+              <td><a href={row.event.url} target="_blank" rel="noopener noreferrer">{row.event.date}</a></td>
             </tr>
           ))}
         </tbody>
