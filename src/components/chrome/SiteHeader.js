@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Login from '../auth/Login';
 import Profile from '../auth/Profile';
+import { Navbar, NavbarBrand } from 'reactstrap';
+import LoginCheck from '../auth/LoginCheck';
 
 class SiteHeader extends React.Component {
   static propTypes = {
@@ -10,12 +11,12 @@ class SiteHeader extends React.Component {
 
   render() {
     return (
-      <div className="site-header">
-        <div>Music This Week</div>
-        <div>
-          {this.props.isLoggedIn ? <Profile /> : <Login />}
-        </div>
-      </div>
+      <Navbar dark color="black" fixed="top" className="site-header">
+        <NavbarBrand href="/">Discover Live</NavbarBrand>
+        <LoginCheck>
+          { isLoggedIn => isLoggedIn && <Profile />}
+        </LoginCheck>
+      </Navbar>
     )
   }
 }

@@ -31,7 +31,7 @@ class SearchForm extends Component {
     return (
       <div className="hero">
         <div className="form">
-          <h3>FIND MUSIC THIS WEEK:</h3>
+          <h3>DISCOVER LIVE MUSIC THIS WEEK:</h3>
           <input
             type="text"
             value={this.state.location}

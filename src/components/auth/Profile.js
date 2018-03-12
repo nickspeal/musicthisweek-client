@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { removeToken } from '../../actions/authActions';
+import { withRouter } from 'react-router-dom';
 
 class Profile extends Component {
 
   onClick = () => {
     this.props.removeToken();
+    this.props.history.push('/');
   }
 
   render() {
@@ -16,7 +18,7 @@ class Profile extends Component {
 
 }
 
-export default connect(null, { removeToken })(Profile);
+export default withRouter(connect(null, { removeToken })(Profile));
 
 // <h1>Welcome, {{ display_name }}!</h1>
 // <div>

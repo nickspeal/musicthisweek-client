@@ -18,6 +18,7 @@ const transitionPoint = `${Math.random() * (max - min) + min}%`
 
 const style = {
   backgroundImage: `linear-gradient(${color1}, ${color2} ${transitionPoint})`,
+  backgroundColor: 'black',
   display: 'flex',
   flexDirection: 'column',
   height: '100vh',

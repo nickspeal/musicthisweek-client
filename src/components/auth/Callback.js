@@ -34,7 +34,7 @@ class Callback extends React.Component {
     }
   }
 
-  render = () => <Redirect to="/" />
+  render = () => <Redirect to="/search" />
 }
 
 

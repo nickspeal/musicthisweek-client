@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PlaylistTable from './PlaylistTable';
+import { Container, Row } from 'reactstrap';
 
 class Playlist extends Component {
   static propTypes = {
@@ -49,22 +50,31 @@ class Playlist extends Component {
 
   render() {
     return (
-      <div style={{ width: '80%', height: '100%', margin: 'auto' }}>
-        <div style={{ textAlign: 'left', maxWidth: '600px', marginBottom: '50px' }}>
+      <Container style={{ width: '80%', height: '100%', marginTop: '80px' }}>
+        <Row style={{ textAlign: 'left', maxWidth: '600px', marginBottom: '50px', display: 'flex', flexDirection: 'column' }}>
           <h4>MADE FOR YOU</h4>
-          <h1>Music This Week</h1>
+          <h1>DISCOVER NOW</h1>
           <p>
             Your weekly mixtape of upcoming concerts. Enjoy new discoveries and maybe youll find a concert you want to see! Check back here to update the playlist next week!
           </p>
           <p>
-            Made for you by Music This Week - {this.state.events.length} concerts, {this.state.songs.length} songs
+            3/12/2018 - 3/19/2018
+          </p>
+          <p>
+            {this.state.events.length} concerts, {this.state.songs.length} songs
           </p>
           <button onClick={this.onClick} style={{ width: '200px' }}>
             PLAY ON SPOTIFY
           </button>
-        </div>
-        {this.state.songs.length ? <PlaylistTable list={this.state.songs} /> : <div>Searching for shows near you...</div>}
-      </div>
+        </Row>
+        {this.state.songs.length ? (
+          <Row>
+            <PlaylistTable list={this.state.songs} />
+          </Row>
+        ) : (
+          <div>Searching for shows near you...</div>
+        )}
+      </Container>
     );
   }
 

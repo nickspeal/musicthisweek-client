@@ -1,18 +1,17 @@
 /* spotify green: #1ed760 */
 .site-header {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.8);
   display: flex;
   color: white;
-  padding: 16px;
   justify-content: space-between;
 }
 
 body {
-  background: black;
+  background: white;
   color: white;
   margin: 0;
   padding: 0;
-  font-family: helvetica;
+  font-family: sans-serif;
 }
 
 .hero {
@@ -24,8 +23,19 @@ body {
   margin-bottom: auto;
 }
 
+.hero-center {
+  text-align: center;
+  max-width: 700px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .top-pad {
   padding-top: 10%;
+}
+
+.row {
+  padding: 20px 0;
 }
 
 .profile-links {
@@ -39,6 +49,7 @@ input {
   background-color: #282828;
   border: none;
   border-radius: 22px;
+  color: white;
   padding-left: 22px;
   margin: 11px 0;
   min-height: 44px;
@@ -68,6 +79,8 @@ button {
   border: none;
   border-radius: 22px;
   height: 44px;
+  padding: 0 20px;
+  cursor: pointer;
 }
 
 /* and logout */

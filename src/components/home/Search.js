@@ -5,8 +5,11 @@ import SearchForm from './SearchForm';
 import Playlist from './Playlist';
 import { post } from '../../apis/MusicThisWeekAPI';
 import { removeToken } from '../../actions/authActions';
+import SiteChrome from '../chrome/SiteChrome';
+import BackgroundGradient from '../chrome/BackgroundGradient';
+import { SPOTIFY_URL } from '../../apis/SpotifyAPI';
 
-class Home extends React.Component {
+class Search extends React.Component {
   static propTypes = {
     spotify_token: PropTypes.string.isRequired,
   }
@@ -32,6 +35,7 @@ class Home extends React.Component {
       // TODO move this into the API or something more general
       console.log("403 Unauthorized response. Prompting to log in.")
       this.props.removeToken();
+      window.location = SPOTIFY_URL;
     } else {
       console.error("Unexpected response from API: ", response);
     }
@@ -45,10 +49,17 @@ class Home extends React.Component {
   }
 
   render() {
-    if (this.state.playlist) {
-      return <Playlist playlist={this.state.playlist} />
-    }
-    return <SearchForm onSubmit={this.onSubmit} />
+    return (
+      <SiteChrome>
+        <BackgroundGradient>
+          { this.state.playlist ? (
+            <Playlist playlist={this.state.playlist} />
+          ) : (
+            <SearchForm onSubmit={this.onSubmit} />
+          )}
+        </BackgroundGradient>
+      </SiteChrome>
+    )
   }
 }
 
@@ -56,4 +67,4 @@ const mapStateToProps = state => ({
   spotify_token: state.auth.spotify_token,
 })
 
-export default connect(mapStateToProps, { removeToken })(Home);
+export default connect(mapStateToProps, { removeToken })(Search);
