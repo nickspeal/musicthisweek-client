@@ -50,7 +50,7 @@ const About = () => (
           <li>Up-to-date concert listings from Eventful</li>
           <li>Background playlist creation</li>
           <li>Mobile-optimized design</li>
-          <li>Open Source - Find the source code for the <a href="https://github.com/nickspeal/musicThisWeek-client/" target="_blank" noopener noreferrer>React Frontend</a> and <a href="https://github.com/nickspeal/musicThisWeek/" target="_blank" noopener noreferrer>Django Backend</a> on Github</li>
+          <li>Open Source - Find the source code for the <a href="https://github.com/nickspeal/musicThisWeek-client/" target="_blank" rel="noopener noreferrer">React Frontend</a> and <a href="https://github.com/nickspeal/musicThisWeek/" target="_blank" rel="noopener noreferrer">Django Backend</a> on Github</li>
         </ul>
         </Row>
         </Container>
