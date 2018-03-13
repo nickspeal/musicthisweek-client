@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8888';
+const BASE_URL = process.env.REACT_APP_API_ENDPOINT;
 
 export function get(endpoint, token) {
   const headers = {};
