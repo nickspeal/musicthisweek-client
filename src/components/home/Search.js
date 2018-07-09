@@ -45,7 +45,7 @@ class Search extends React.Component {
 
   onSubmit = (data) => {
     console.log('submitting data: ', data);
-    post('/create', { ...data }, this.props.spotify_token).then(this.handleResponse)
+    post('create', { ...data }, this.props.spotify_token).then(this.handleResponse)
   }
 
   render() {
