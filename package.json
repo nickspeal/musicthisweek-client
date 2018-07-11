@@ -19,6 +19,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "pre-deploy": "echo 'about to deploy'",
+    "deploy": "npm run build && aws s3 cp  ./build s3://discoverlive.speal.ca --recursive"
   }
 }
