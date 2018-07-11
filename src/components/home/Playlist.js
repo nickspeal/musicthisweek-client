@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PlaylistTable from './PlaylistTable';
 import { Container, Row } from 'reactstrap';
+import PlaylistTable from './PlaylistTable';
+import { initiateWebsocket } from '../../apis/MusicThisWeekAPI';
 
 class Playlist extends Component {
   static propTypes = {
@@ -18,12 +19,8 @@ class Playlist extends Component {
   }
 
   componentDidMount() {
-    console.log("starting websocket")
-    const url = `ws://127.0.0.1:8888/subscribe/?playlist=${this.props.playlist}`;
-    this.socket = new WebSocket(url); // optional second arg protocol
-    this.socket.onopen = (event) => console.log("socket opened");
+    this.socket = initiateWebsocket(`/subscribe/?playlist=${this.props.playlist}`);
     this.socket.onmessage = this.onMessage
-    this.socket.onclose = (event) => console.log("socket closed");
   }
 
   onMessage = ({ data }) => {

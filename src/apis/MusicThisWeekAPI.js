@@ -5,7 +5,7 @@ export function get(endpoint, token) {
   if (token) {
     headers['Authorization'] = `Bearer: ${token}`
   }
-  return fetch(BASE_URL + endpoint, {
+  return fetch('http://' + BASE_URL + endpoint, {
     method: 'GET'
   })
 };
@@ -19,10 +19,19 @@ export function post(endpoint, data, token) {
     headers['Authorization'] = `Bearer: ${token}`
   }
 
-  return fetch(BASE_URL + endpoint, {
+  return fetch('http://' + BASE_URL + endpoint, {
     body: JSON.stringify(data),
     method: 'POST',
     mode: 'cors',
     headers,
   })
+}
+
+export function initiateWebsocket(endpoint) {
+  console.log("starting websocket");
+  const url = `ws://${BASE_URL}${endpoint}`;
+  const socket = new WebSocket(url); // optional second arg protocol
+  socket.onopen = (event) => console.log("socket opened");
+  socket.onclose = (event) => console.log("socket closed");
+  return socket;
 }
