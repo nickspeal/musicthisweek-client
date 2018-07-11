@@ -39,13 +39,15 @@ class Search extends React.Component {
     } else {
       console.error("Unexpected response from API: ", response);
     }
+  }
 
-
+  handleError = (error) => {
+    console.error("Error submitting request", error);
   }
 
   onSubmit = (data) => {
     console.log('submitting data: ', data);
-    post('create', { ...data }, this.props.spotify_token).then(this.handleResponse)
+    post('/create', { ...data }, this.props.spotify_token).then(this.handleResponse).catch(this.handleError);
   }
 
   render() {

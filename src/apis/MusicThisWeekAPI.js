@@ -10,6 +10,7 @@ export function get(endpoint, token) {
   })
 };
 
+// Endpoint should start with a slash
 export function post(endpoint, data, token) {
   const headers = {
     'content-type': 'application/json',
