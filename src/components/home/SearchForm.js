@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
-const DEFAULT_NRESULTS = 50; // 200
+const DEFAULT_NRESULTS = 200;
 const DEFAULT_INTERVAL = 7; // days
 
 class SearchForm extends Component {
